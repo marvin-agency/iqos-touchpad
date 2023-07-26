@@ -1,0 +1,59 @@
+.Dropdown-control {
+    background-color: transparent !important;
+    min-width: clamp(110px, 40vw, 450px);
+    padding: 28px 30px !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #34303D !important;
+}
+.Dropdown-arrow {
+    position: relative !important;
+    right: auto !important;
+    left: auto !important;
+    top: auto !important;
+}
+
+.Dropdown-menu {
+    border: 1px solid #34303D !important;
+    max-height: 400px !important;
+}
+
+.Dropdown-placeholder {
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 43px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
+.Dropdown-option {
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 43px;
+    letter-spacing: 0em;
+}
+
+.Dropdown-arrow-wrapper {
+    width: 18px;
+    height: 10px;
+}
+
+.arrow-open {
+    display: flex;
+    background-image: url("/public/chevron-down.svg");
+    object-fit: contain;
+    width: 24px;
+    rotate: 180deg;
+    height: 14px;
+    object-position: center;
+}
+
+.arrow-close {
+    display: flex;
+    background-image: url("/public/chevron-down.svg");
+    object-fit: contain;
+    object-position: center;
+    width: 24px;
+    height: 14px;
+}
