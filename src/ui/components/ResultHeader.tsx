@@ -6,9 +6,9 @@ import i18next from "i18next";
 
 export const ResultHeader = ({ result }: { result: IQOS_DEVICE[] }) => {
   const { t } = useTranslation();
+  const isCz = i18next.language === "cz";
   const deviceTypes = (result || []).map((d) => deviceType[d]);
   const isVape = deviceTypes.includes("vape");
-  const isCz = i18next.language === "cz";
 
   const isVapeTobacco =
     deviceTypes.length === 2 &&

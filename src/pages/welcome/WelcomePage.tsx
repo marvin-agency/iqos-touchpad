@@ -2,7 +2,7 @@ import { Assets } from "../../assets/assets";
 import { Button } from "../../ui/buttons/Button";
 import { Typography } from "../../ui/Typograhy";
 import tw from "twin.macro";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 /** @jsxImportSource @emotion/react */
 import iqosIlumaCz from "../../assets/images/welcome-iluma-cz.png";
 import iqosIlumaSk from "../../assets/images/welcome-iluma-sk.png";
@@ -15,7 +15,6 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 
 export const WelcomePage = () => {
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const isCz = i18next.language === "cz";
   const welcomeIlumaImage = isCz ? iqosIlumaCz : iqosIlumaSk;
@@ -51,26 +50,21 @@ export const WelcomePage = () => {
               <Typography.H1 containerCss={[tw`text-primary mb-20`]}>
                 {t("findTheRightProduct")}
               </Typography.H1>
-              <Button.Contained
-                variant={"light"}
-                containerCss={[tw`mb-12`]}
-                onClick={() => navigate(routes.QUIZ)}
-              >
-                {t("chooseBetterCigaretteAlternative")}
-              </Button.Contained>
-              <Button.Outlined onClick={() => navigate(routes.QUIZ)}>
-                {t("callIQOSPro")}
-              </Button.Outlined>
+              <Link to={routes.QUIZ_ONE}>
+                <Button.Contained variant={"light"} containerCss={[tw`mb-12`]}>
+                  {t("chooseBetterCigaretteAlternative")}
+                </Button.Contained>
+              </Link>
+              <Button.Outlined>{t("callIQOSPro")}</Button.Outlined>
             </div>
-            <div className="flex items-center space-x-4">
-              <Assets.ChevronLeft className="text-white" />
-              <Typography.Link
-                containerCss={[tw`text-white`]}
-                onClick={() => navigate(routes.LANGUAGE)}
-              >
-                {t("returnToLanguageSelect")}
-              </Typography.Link>
-            </div>
+            <Link to={routes.LANGUAGE}>
+              <div className="flex items-center space-x-4">
+                <Assets.ChevronLeft className="text-white" />
+                <Typography.Link containerCss={[tw`text-white`]}>
+                  {t("returnToLanguageSelect")}
+                </Typography.Link>
+              </div>
+            </Link>
           </div>
           <Assets.AsfAlternative className="absolute bottom-10 right-10" />
         </div>

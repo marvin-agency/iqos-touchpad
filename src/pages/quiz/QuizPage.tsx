@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "../../ui/buttons/Button";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { QuizPageOne } from "./QuizPageOne";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { QuizPageTwo } from "./QuizPageTwo";
 import { QuizPageThree } from "./QuizPageThree";
 import { AnimatePresence, motion as m } from "framer-motion";
@@ -69,34 +69,34 @@ export const QuizPage = () => {
             {t("question")} {currentQuestion}/3
           </Typography.BodyMedium>
         </div>
-        <div className="flex px-default-x-padding flex-1 flex-col items-center self-center transition-all">
+        <div className="flex flex-1 flex-col items-center self-center px-default-x-padding transition-all">
           <div className="mb-20">
-            <AnimatePresence>
-              {currentQuestion === 1 && (
-                <QuizPageOne
-                  selectedAnswers={Q1Answers}
-                  handleImagePress={handlePressQ1}
-                />
-              )}
-              {currentQuestion === 2 && (
-                <QuizPageTwo
-                  selectedAnswers={Q2Answers}
-                  handleImagePress={handlePressQ2}
-                />
-              )}
-              {currentQuestion === 3 && (
-                <QuizPageThree
-                  selectedAnswer={Q3Answer}
-                  handleImagePress={handlePressQ3}
-                />
-              )}
-            </AnimatePresence>
+            {/*<AnimatePresence>*/}
+            {/*  {currentQuestion === 1 && (*/}
+            <QuizPageOne
+              selectedAnswers={Q1Answers}
+              handleImagePress={handlePressQ1}
+            />
+            {/*)}*/}
+            {/*{currentQuestion === 2 && (*/}
+            <QuizPageTwo
+              selectedAnswers={Q2Answers}
+              handleImagePress={handlePressQ2}
+            />
+            {/*)}*/}
+            {/*{currentQuestion === 3 && (*/}
+            <QuizPageThree
+              selectedAnswer={Q3Answer}
+              handleImagePress={handlePressQ3}
+            />
+            {/*)}*/}
+            {/*</AnimatePresence>*/}
           </div>
 
           <div className="my-4 flex w-full justify-between p-1">
             <Button.Outlined
-                containerCss={[tw`px-14`]}
-                onClick={() => {
+              containerCss={[tw`px-14`]}
+              onClick={() => {
                 if (currentQuestion === 1) {
                   navigate(-1);
                 } else {
@@ -107,34 +107,36 @@ export const QuizPage = () => {
             >
               {t("back")}
             </Button.Outlined>
-            <Button.Contained
-              onClick={() => {
-                if (currentQuestion === 3 && Q3Answer.length > 0) {
-                  const result = calculateResult({
-                    Q1Answers,
-                    Q2Answers,
-                  });
-                  const taste = Q3Answer;
-                  if (result?.[0] !== "other") {
-                    navigate(routes.RESULTS, { state: { result, taste } });
+            <Link to={routes.RESULTS}>
+              <Button.Contained
+                onClick={() => {
+                  if (currentQuestion === 3 && Q3Answer.length > 0) {
+                    const result = calculateResult({
+                      Q1Answers,
+                      Q2Answers,
+                    });
+                    const taste = Q3Answer;
+                    if (result?.[0] !== "other") {
+                      navigate(routes.RESULTS, { state: { result, taste } });
+                    } else {
+                      navigate("https://iqos.com");
+                    }
                   } else {
-                    navigate("https://iqos.com");
+                    if (
+                      (currentQuestion === 1 && Q1Answers.length === 2) ||
+                      (currentQuestion === 2 && Q2Answers.length > 0) ||
+                      (currentQuestion === 3 && Q3Answer.length > 0)
+                    ) {
+                      setCurrentQuestion((prevNumber) => prevNumber + 1);
+                    }
                   }
-                } else {
-                  if (
-                    (currentQuestion === 1 && Q1Answers.length === 2) ||
-                    (currentQuestion === 2 && Q2Answers.length > 0) ||
-                    (currentQuestion === 3 && Q3Answer.length > 0)
-                  ) {
-                    setCurrentQuestion((prevNumber) => prevNumber + 1);
-                  }
-                }
-              }}
-              trail={FiChevronRight}
-              containerCss={[tw`px-14`]}
-            >
-              {currentQuestion === 3 ? t("end") : t("nextQuestion")}
-            </Button.Contained>
+                }}
+                trail={FiChevronRight}
+                containerCss={[tw`px-14`]}
+              >
+                {currentQuestion === 3 ? t("end") : t("nextQuestion")}
+              </Button.Contained>
+            </Link>
           </div>
         </div>
         <Assets.AsfAlternative className="absolute bottom-14 right-16" />

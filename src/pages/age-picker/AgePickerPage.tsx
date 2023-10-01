@@ -8,7 +8,7 @@ import { Button } from "../../ui/buttons/Button";
 import "./AgePickerPage.css";
 import { useState } from "react";
 import { calculateAge } from "../../shared/utils";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { routes } from "../../navigation/routes";
 
 export const AgePickerPage = () => {
@@ -21,6 +21,7 @@ export const AgePickerPage = () => {
   const [isUnderage, setIsUnderage] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
+
   const options = [
     { value: "1", label: t("months.january") },
     { value: 2, label: t("months.february") },
@@ -113,13 +114,15 @@ export const AgePickerPage = () => {
                 />
               </div>
             </div>
-            <Button.Contained
-              variant={"dark"}
-              containerCss={[tw`w-full`]}
-              onClick={handleConfirm}
-            >
-              {t("agePage.confirm")}
-            </Button.Contained>
+            <Link to={routes.WELCOME}>
+              <Button.Contained
+                variant={"dark"}
+                containerCss={[tw`w-full`]}
+                onClick={handleConfirm}
+              >
+                {t("agePage.confirm")}
+              </Button.Contained>
+            </Link>
           </div>
         )}
         <div className={"flex flex-col items-center px-10 text-center"}>

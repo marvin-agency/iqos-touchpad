@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 /** @jsxImportSource @emotion/react */
 import { motion as m } from "framer-motion";
 import CustomOverlay from "../../assets/images/custom-overlay.png";
@@ -26,28 +26,30 @@ export const LanguagePage = () => {
           className={`absolute right-0 flex h-full w-auto object-cover object-right`}
         />
         <div className="z-10 space-y-12">
-          <Button.Contained
-            variant={"invert"}
-            containerCss={[tw`w-full px-22`]}
-            onClick={async () => {
-              await i18n.changeLanguage("cz");
-              localStorage.setItem("lng", "cz");
-              navigate(hasCheckedAge ? routes.WELCOME : routes.AGE_PICKER);
-            }}
-          >
-            Čeština
-          </Button.Contained>
-          <Button.Contained
-            variant={"invert"}
-            containerCss={[tw`w-full px-22`]}
-            onClick={async () => {
-              await i18n.changeLanguage("sk");
-              localStorage.setItem("lng", "sk");
-              navigate(hasCheckedAge ? routes.WELCOME : routes.AGE_PICKER);
-            }}
-          >
-            Slovenčina
-          </Button.Contained>
+          <Link to={routes.AGE_PICKER}>
+            <Button.Contained
+              variant={"invert"}
+              containerCss={[tw`w-full px-22`]}
+              onClick={async () => {
+                await i18n.changeLanguage("cz");
+                localStorage.setItem("lng", "cz");
+              }}
+            >
+              Čeština
+            </Button.Contained>
+          </Link>
+          <Link to={routes.AGE_PICKER}>
+            <Button.Contained
+              variant={"invert"}
+              containerCss={[tw`w-full px-22`]}
+              onClick={async () => {
+                await i18n.changeLanguage("sk");
+                localStorage.setItem("lng", "sk");
+              }}
+            >
+              Slovenčina
+            </Button.Contained>
+          </Link>
         </div>
       </m.div>
       <Assets.AsfAlternative className="xl:(bottom-12 right-12) absolute bottom-7 right-7" />
